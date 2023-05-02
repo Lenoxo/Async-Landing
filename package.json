@@ -1,0 +1,12 @@
+{
+  "name": "async-landing",
+  "version": "1.0.0",
+  "description": "Este proyecto sirve para aplicar lo que aprendí en el Curso de Asincronismo con JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
