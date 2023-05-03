@@ -4,7 +4,7 @@ const contentImdb = null || document.getElementById('content-imdb')
 // Guardo la url de la API
 const APIyoutube = 'https://youtube-v31.p.rapidapi.com/search?channelId=UC-5MT-BUxTzkPTWMediyV0w&part=snippet%2Cid&order=date&maxResults=8';
 const APIimdb = 'https://imdb-top-100-movies.p.rapidapi.com/';
-// Opciones por defecto de RapidAPI
+// Opciones por defecto de RapidAPI para Youtube
 const optionsYoutube = {
 	method: 'GET',
 	headers: {
@@ -12,6 +12,7 @@ const optionsYoutube = {
 		'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
 	}
 };
+// Opciones por defecto de RapidAPI para IMDb
 const optionsImdb = {
   method: 'GET',
 	headers: {
@@ -19,7 +20,6 @@ const optionsImdb = {
 		'X-RapidAPI-Host': 'imdb-top-100-movies.p.rapidapi.com'
 	}
 }
-// Opciones por defecto de RapidAPI
 
 // Función asincrona para obtener los videos y convertirlos a forma .json
 async function fetchData(urlApi, options) {
@@ -32,15 +32,15 @@ async function fetchData(urlApi, options) {
     }
 }
 
-// Función asincrona que se llama en el momento para escribir de forma dinámica en el DOM los videos
+// Función asincrónica que se llama en el momento para escribir de forma dinámica en el DOM los videos y las películas
 (async () => {
   try {
+    // Obtener los datos de la API de YouTube y almacenarlos en la variable "videos"
     const videos = await fetchData(APIyoutube, optionsYoutube)
-    let view = `
-      ${videos.items.map(video => `
+    // Crear una cadena de texto utilizando la función map() y slice() para recortar el array del primer al octavo elemento
+    let view = `${videos.items.slice(0,8).map(video => `
       <div class="group relative">
-        <div
-          class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
+        <div class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
           <img src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.description}" class="w-full">
         </div>
         <div class="mt-4 flex justify-between">
@@ -50,31 +50,27 @@ async function fetchData(urlApi, options) {
           </h3>
         </div>
       </div>
-      `).slice(0,8).join('')}
-    `;
-    /* 
-    Para los videos, recorto del primer al quinto video usando slice(0,4), y join('') para juntar nuevamente el view.
-    */
+    `).join('')}`
+    // Mostrar los videos en el DOM
     contentYoutube.innerHTML = view
-    console.log(videos)
+
+    // Obtener los datos de la API de IMDB y almacenarlos en la variable "movies"
     const movies = await fetchData(APIimdb, optionsImdb)
-    console.log(movies)
-    view = `
-    ${movies.map(movie => `
-    <div class="group relative">
-      <div
-        class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
-        <img src="${movie.image}" alt="${movie.title}" class="w-full">
+    // Crear una cadena de texto utilizando la función map() y slice() para recortar el array del primer al octavo elemento
+    view = `${movies.slice(0,8).map(movie => `
+      <div class="group relative">
+        <div class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
+          <img src="${movie.image}" alt="${movie.title}" class="w-full">
+        </div>
+        <div class="mt-4 flex justify-between">
+          <h3 class="text-sm text-gray-700">
+            <span aria-hidden="true" class="absolute inset-0"></span>
+            ${movie.title}
+          </h3>
+        </div>
       </div>
-      <div class="mt-4 flex justify-between">
-        <h3 class="text-sm text-gray-700">
-          <span aria-hidden="true" class="absolute inset-0"></span>
-          ${movie.title}
-        </h3>
-      </div>
-    </div>
-    `).slice(0,8).join('')}
-  `;
+    `).join('')}`
+    // Mostrar las películas en el DOM
     contentImdb.innerHTML = view
   } catch (error) {
     console.log(error)
