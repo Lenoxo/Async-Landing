@@ -1,3 +1,5 @@
+// Importo la key de Rapid API (privada)
+const apiKey = process.env.RAPIDAPIKEY;
 // Selecciono la parte del contenido
 const contentYoutube = null || document.getElementById('content-youtube')
 const contentImdb = null || document.getElementById('content-imdb')
@@ -8,7 +10,7 @@ const APIimdb = 'https://imdb-top-100-movies.p.rapidapi.com/';
 const optionsYoutube = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': ${{ secrets.RAPIDAPIKEY }},
+		'X-RapidAPI-Key': apiKey,
 		'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
 	}
 };
