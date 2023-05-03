@@ -1,5 +1,6 @@
 // Importo la key de Rapid API (privada)
-const apiKey = process.env.RAPIDAPIKEY;
+const apiKey = ${{ RAPIDAPIKEY }};
+console.log(apiKey)
 // Selecciono la parte del contenido
 const contentYoutube = null || document.getElementById('content-youtube')
 const contentImdb = null || document.getElementById('content-imdb')
