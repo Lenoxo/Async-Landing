@@ -8,7 +8,7 @@ const APIimdb = 'https://imdb-top-100-movies.p.rapidapi.com/';
 const optionsYoutube = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': RAPIDAPIKEY,
+		'X-RapidAPI-Key': ${{ secrets.RAPIDAPIKEY }},
 		'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
 	}
 };
