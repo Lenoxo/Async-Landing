@@ -13,9 +13,9 @@ jobs:
         uses: actions/checkout@master
 
       - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@master
+        uses: JamesIves/github-pages-deploy-action@main
         env:
           RAPIDAPIKEY: ${{ secrets.RAPIDAPIKEY }}
           BRANCH: gh-pages
-          FOLDER: public
+          FOLDER: docs
           BUILD_SCRIPT: yarn && yarn run build
