@@ -39,7 +39,7 @@ async function fetchData(urlApi, options) {
     const videos = await fetchData(APIyoutube, optionsYoutube)
     // Crear una cadena de texto utilizando la función map() y slice() para recortar el array del primer al octavo elemento
     let view = `${videos.items.slice(0,8).map(video => `
-      <div class="group relative">
+      <a class="group relative" href="https://www.youtube.com/watch?v=${video.id.videoId}">
         <div class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
           <img src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.description}" class="w-full">
         </div>
@@ -49,7 +49,7 @@ async function fetchData(urlApi, options) {
             ${video.snippet.title}
           </h3>
         </div>
-      </div>
+      </a>
     `).join('')}`
     // Mostrar los videos en el DOM
     contentYoutube.innerHTML = view
