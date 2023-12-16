@@ -58,7 +58,7 @@ async function fetchData(urlApi, options) {
     const movies = await fetchData(APIimdb, optionsImdb)
     // Crear una cadena de texto utilizando la función map() y slice() para recortar el array del primer al octavo elemento
     view = `${movies.slice(0,8).map(movie => `
-      <div class="group relative">
+      <a class="group relative" href="${movie.imdb_link}">
         <div class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
           <img src="${movie.image}" alt="${movie.title}" class="w-full">
         </div>
@@ -68,7 +68,7 @@ async function fetchData(urlApi, options) {
             ${movie.title}
           </h3>
         </div>
-      </div>
+      </a>
     `).join('')}`
     // Mostrar las películas en el DOM
     contentImdb.innerHTML = view
